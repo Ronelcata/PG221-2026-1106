@@ -1,0 +1,24 @@
+
+[
+  {
+    "grupo": "P1",
+    "entrada": "2 3 2\n5 abc1 0 0 10 20 30\n2 Z9 1 1 7 8 9\n",
+    "salida": "5 ABC1 10 1\n2 Z9 16 1\nTOTAL 26\nORDER 2 5\nFIND 2 16\n"
+  },
+  {
+    "grupo": "P2",
+    "entrada": "1 1 9999\n9999 1A 1 100 100\n",
+    "salida": "9999 1A 100 1\nTOTAL 100\nORDER 9999\nFIND 9999 100\n"
+  },
+  {
+    "grupo": "P3",
+    "entrada": "1 1 2\n1 B 0 0 10\n",
+    "salida": "1 B 0 0\nTOTAL 0\nORDER 1\nFIND 2 -1\n"
+  },
+  {
+    "grupo": "P4",
+    "entrada": "2 1 1\n4 A 0 0 10\n4 E 0 0 20\n",
+    "salida": "ERROR\n"
+  }
+]
+
