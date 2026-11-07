@@ -20,7 +20,6 @@ int calcular(const int muestras[], int m, int tipo, int p,
     }
 
     for (j = 0; j < m; j++) {
-
         posicion = (j + p) % longitud;
         caracter = toupper((unsigned char)nombre[posicion]);
 
@@ -28,7 +27,6 @@ int calcular(const int muestras[], int m, int tipo, int p,
             if (caracter == 'A' || caracter == 'E' ||
                 caracter == 'I' || caracter == 'O' ||
                 caracter == 'U') {
-
                 score += muestras[j];
                 *estado = 1;
             }
@@ -52,6 +50,26 @@ int total_rec(const Registro registros[], int n) {
 
     return registros[n - 1].score +
            total_rec(registros, n - 1);
+}
+
+void ordenar(Registro registros[], int n) {
+
+    int i, j;
+    Registro temporal;
+
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - 1 - i; j++) {
+
+            if (registros[j].score < registros[j + 1].score ||
+                (registros[j].score == registros[j + 1].score &&
+                 registros[j].id > registros[j + 1].id)) {
+
+                temporal = registros[j];
+                registros[j] = registros[j + 1];
+                registros[j + 1] = temporal;
+            }
+        }
+    }
 }
 
 int leer_nombre(char nombre[MAX_NOMBRE]) {
@@ -102,7 +120,6 @@ int nombre_valido(const char nombre[]) {
               (c >= 'a' && c <= 'z') ||
               (c >= '0' && c <= '9') ||
               c == '_')) {
-
             return 0;
         }
     }
@@ -144,6 +161,7 @@ int main(void) {
     char extra;
 
     Registro registros[MAX_REGISTROS];
+    Registro ordenados[MAX_REGISTROS];
     int muestras[MAX_REGISTROS][MAX_MUESTRAS];
 
     if (scanf("%d %d %d", &n, &m, &q) != 3) {
@@ -226,6 +244,12 @@ int main(void) {
     (void)media;
 
     for (i = 0; i < n; i++) {
+        ordenados[i] = registros[i];
+    }
+
+    ordenar(ordenados, n);
+
+    for (i = 0; i < n; i++) {
         printf("%d %s %d %d\n",
                registros[i].id,
                registros[i].nombre,
@@ -234,6 +258,12 @@ int main(void) {
     }
 
     printf("TOTAL %d\n", total);
+
+    printf("ORDER");
+    for (i = 0; i < n; i++) {
+        printf(" %d", ordenados[i].id);
+    }
+    printf("\n");
 
     return 0;
 
