@@ -83,10 +83,63 @@ Se utilizaran:
 
 ## 8. Pseudocodigo
 
-[Completar con los pasos generales del algoritmo
-desde la lectura de datos hasta la impresion de resultados.]
+INICIO
+
+Leer n, m y q.
+
+Validar que los valores esten dentro de sus rangos.
+
+PARA cada registro:
+    Leer identificador.
+    Comprobar que sea valido y no este repetido.
+    Leer nombre y validar sus caracteres.
+    Convertir nombre a mayusculas.
+    Leer tipo y posicion.
+    Validar configuracion.
+    Leer las muestras.
+    Validar cada muestra.
+
+Si existe algun error:
+    Imprimir ERROR.
+    Terminar.
+
+PARA cada registro:
+    Calcular score y estado.
+
+Calcular el total mediante recursividad.
+Calcular la media utilizando double.
+
+Crear copias de los registros.
+Ordenar una copia por score.
+Ordenar otra copia por identificador.
+Realizar busqueda binaria de q.
+
+Imprimir los registros en orden original.
+Imprimir TOTAL, ORDER y FIND.
+
+FIN
 
 ## 9. Validacion
 
-[Documentar las pruebas publicas y propias realizadas,
-los resultados obtenidos y los errores corregidos.]
+Se ejecutaron seis pruebas publicas:
+- Grupo 1: calculo normal.
+- Grupo 2: valores minimos.
+- Grupo 3: empates y busqueda existente.
+- Grupo 4: secuencias y configuraciones.
+- Grupo 5: busqueda ausente y reinicio de acumuladores.
+- Grupo 6: entrada invalida.
+
+Resultado obtenido: 6/6 pruebas correctas.
+
+Tambien se ejecutaron cuatro pruebas propias:
+- P1: dos registros con diferentes configuraciones.
+- P2: identificador y valores en limites superiores.
+- P3: score cero y busqueda sin coincidencia.
+- P4: identificadores duplicados.
+
+Resultado obtenido: 4/4 pruebas correctas.
+
+La compilacion se realizo con GCC y las opciones
+-std=c11 -Wall -Wextra -Wpedantic.
+
+Las pruebas se ejecutaron utilizando evaluar.py.
