@@ -72,6 +72,48 @@ void ordenar(Registro registros[], int n) {
     }
 }
 
+void ordenar_por_id(Registro registros[], int n) {
+
+    int i, j;
+    Registro temporal;
+
+    for (i = 0; i < n - 1; i++) {
+        for (j = 0; j < n - 1 - i; j++) {
+
+            if (registros[j].id > registros[j + 1].id) {
+                temporal = registros[j];
+                registros[j] = registros[j + 1];
+                registros[j + 1] = temporal;
+            }
+        }
+    }
+}
+
+int buscar(const Registro registros[], int n, int id) {
+
+    int inicio = 0;
+    int fin = n - 1;
+    int medio;
+
+    while (inicio <= fin) {
+
+        medio = inicio + (fin - inicio) / 2;
+
+        if (registros[medio].id == id) {
+            return medio;
+        }
+
+        if (registros[medio].id < id) {
+            inicio = medio + 1;
+        }
+        else {
+            fin = medio - 1;
+        }
+    }
+
+    return -1;
+}
+
 int leer_nombre(char nombre[MAX_NOMBRE]) {
 
     int caracter;
@@ -90,7 +132,8 @@ int leer_nombre(char nombre[MAX_NOMBRE]) {
 
         if (largo < MAX_NOMBRE - 1) {
             nombre[largo] = (char)caracter;
-        } else {
+        }
+        else {
             excedido = 1;
         }
 
@@ -157,11 +200,14 @@ int main(void) {
     int n, m, q;
     int i, j;
     int total;
+    int posicion;
     double media;
     char extra;
 
     Registro registros[MAX_REGISTROS];
     Registro ordenados[MAX_REGISTROS];
+    Registro por_id[MAX_REGISTROS];
+
     int muestras[MAX_REGISTROS][MAX_MUESTRAS];
 
     if (scanf("%d %d %d", &n, &m, &q) != 3) {
@@ -229,6 +275,7 @@ int main(void) {
     }
 
     for (i = 0; i < n; i++) {
+
         registros[i].score = calcular(
             muestras[i],
             m,
@@ -245,9 +292,11 @@ int main(void) {
 
     for (i = 0; i < n; i++) {
         ordenados[i] = registros[i];
+        por_id[i] = registros[i];
     }
 
     ordenar(ordenados, n);
+    ordenar_por_id(por_id, n);
 
     for (i = 0; i < n; i++) {
         printf("%d %s %d %d\n",
@@ -264,6 +313,15 @@ int main(void) {
         printf(" %d", ordenados[i].id);
     }
     printf("\n");
+
+    posicion = buscar(por_id, n, q);
+
+    if (posicion == -1) {
+        printf("FIND %d -1\n", q);
+    }
+    else {
+        printf("FIND %d %d\n", q, por_id[posicion].score);
+    }
 
     return 0;
 
