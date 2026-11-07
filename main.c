@@ -44,6 +44,16 @@ int calcular(const int muestras[], int m, int tipo, int p,
     return score;
 }
 
+int total_rec(const Registro registros[], int n) {
+
+    if (n == 0) {
+        return 0;
+    }
+
+    return registros[n - 1].score +
+           total_rec(registros, n - 1);
+}
+
 int leer_nombre(char nombre[MAX_NOMBRE]) {
 
     int caracter;
@@ -129,6 +139,8 @@ int main(void) {
 
     int n, m, q;
     int i, j;
+    int total;
+    double media;
     char extra;
 
     Registro registros[MAX_REGISTROS];
@@ -209,6 +221,10 @@ int main(void) {
         );
     }
 
+    total = total_rec(registros, n);
+    media = total / (double)n;
+    (void)media;
+
     for (i = 0; i < n; i++) {
         printf("%d %s %d %d\n",
                registros[i].id,
@@ -216,6 +232,8 @@ int main(void) {
                registros[i].score,
                registros[i].estado);
     }
+
+    printf("TOTAL %d\n", total);
 
     return 0;
 
